@@ -8,3 +8,4 @@ include_directories(/Users/deatonjd/Code/Utilities/googletest-release-1.8.0/incl
 link_directories(/Users/deatonjd/Code/Utilities/googletest-release-1.8.0/lib)
 
 add_subdirectory(ch01)
+add_subdirectory(ch02)

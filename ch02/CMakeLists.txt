@@ -2,6 +2,7 @@ project(ch02)
 
 set(SOURCE_FILES
         main.cpp
+        Soundex.h
         SoundexTest.cpp)
 
 add_executable(ch02 ${SOURCE_FILES})

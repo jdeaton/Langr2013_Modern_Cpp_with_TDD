@@ -26,8 +26,14 @@ private:
 
     string encodedDigits(const string &word) const {
         string encoding;
-        for (auto letter: word) { encoding += encodedDigit(letter); }
+        for (auto letter: word) {
+            if (isComplete(encoding)) { break; }
+            encoding += encodedDigit(letter); }
         return encoding;
+    }
+
+    bool isComplete(const string& encoding) const {
+        return encoding.length() == MAX_CODE_LENGTH - 1;
     }
 
     string encodedDigit(char letter) const {

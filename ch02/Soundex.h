@@ -25,10 +25,12 @@ public:
                 {'r', "6"}
         };
         auto it = encodings.find(letter);
-        return it == encodings.end() ? "" : it->second;
+        return it == encodings.end() ? _NOT_A_DIGIT : it->second;
     }
 
 private:
+    const string _NOT_A_DIGIT{"*"};
+
     string head(const string& word) const {
         return word.substr(0, 1);
     }
@@ -45,7 +47,9 @@ private:
         string encoding;
         for (auto letter: word) {
             if (isComplete(encoding)) { break; }
-            if (encodedDigit(letter) != lastDigit(encoding)) {
+
+            auto digit = encodedDigit(letter);
+            if (digit != lastDigit(encoding) && digit != lastDigit(encoding)) {
                 encoding += encodedDigit(letter);
             }
          }
@@ -53,7 +57,7 @@ private:
     }
 
     string lastDigit(const string &encoding) const {
-        if (encoding.empty()) { return ""; }
+        if (encoding.empty()) { return _NOT_A_DIGIT; }
         return string(1, encoding.back());
     }
 

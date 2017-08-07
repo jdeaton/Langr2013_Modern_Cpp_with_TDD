@@ -11,7 +11,7 @@ static const size_t MAX_CODE_LENGTH{4};
 class Soundex {
 public:
     string encode(const string& word) const {
-        return zeroPad(upperFront(head(word)) + encodedDigits(tail(word)));
+        return zeroPad(upperFront(head(word)) + tail(encodedDigits(word)));
     }
 
     string encodedDigit(char letter) const {
@@ -49,12 +49,15 @@ private:
 
     string encodedDigits(const string &word) const {
         string encoding;
-        for (auto letter: word) {
+
+        encoding += encodedDigit(word.front());
+
+        for (auto letter: tail(word)) {
             if (isComplete(encoding)) { break; }
 
             auto digit = encodedDigit(letter);
-            if (digit != lastDigit(encoding) && digit != lastDigit(encoding)) {
-                encoding += encodedDigit(letter);
+            if (digit != _NOT_A_DIGIT && digit != lastDigit(encoding)) {
+                encoding += digit;
             }
          }
         return encoding;
@@ -66,7 +69,7 @@ private:
     }
 
     bool isComplete(const string& encoding) const {
-        return encoding.length() == MAX_CODE_LENGTH - 1;
+        return encoding.length() == MAX_CODE_LENGTH;
     }
 
     string zeroPad(const string& word) const {

@@ -1,3 +1,6 @@
 # CLion IDE & CMake Directories
 .idea/
 cmake-build-debug/
+
+# macOS Files
+.DS_Store

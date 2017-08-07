@@ -24,7 +24,7 @@ public:
                 {'m', "5"}, {'n', "5"},
                 {'r', "6"}
         };
-        auto it = encodings.find(letter);
+        auto it = encodings.find(lower(letter));
         return it == encodings.end() ? _NOT_A_DIGIT : it->second;
     }
 
@@ -41,6 +41,10 @@ private:
 
     string upperFront(const string& phrase) const {
         return string(1, toupper(static_cast<unsigned char>(phrase.front())));
+    }
+
+    char lower(char c) const {
+        return static_cast<unsigned char>(tolower(static_cast<unsigned char>(c)));
     }
 
     string encodedDigits(const string &word) const {

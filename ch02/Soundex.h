@@ -49,18 +49,26 @@ private:
 
     string encodedDigits(const string &word) const {
         string encoding;
-
-        encoding += encodedDigit(word.front());
-
-        for (auto letter: tail(word)) {
-            if (isComplete(encoding)) { break; }
-
-            auto digit = encodedDigit(letter);
-            if (digit != _NOT_A_DIGIT && digit != lastDigit(encoding)) {
-                encoding += digit;
-            }
-         }
+        encodeHead(encoding, word);
+        encodeTail(encoding, word);
         return encoding;
+    }
+
+    void encodeHead(string& encoding, const string& word) const {
+        encoding += encodedDigit(word.front());
+    }
+
+    void encodeTail(string& encoding, const string& word) const {
+        for (auto letter: tail(word)) {
+            if (!isComplete(encoding)) { encodeLetter(encoding, letter); }
+        }
+    }
+
+    void encodeLetter(string& encoding, char letter) const {
+        auto digit = encodedDigit(letter);
+        if (digit != _NOT_A_DIGIT && digit != lastDigit(encoding)) {
+            encoding += digit;
+        }
     }
 
     string lastDigit(const string &encoding) const {
